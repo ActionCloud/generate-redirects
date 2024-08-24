@@ -1,0 +1,10 @@
+{
+  "name": "generate-redirects-action",
+  "version": "1.0.0",
+  "description": "GitHub Action to generate redirect HTML files",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "node dist/index.js"
+  },
+  "dependencies": {}
+}

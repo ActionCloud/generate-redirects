@@ -1,0 +1,43 @@
+name: Generate Redirects
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  generate-redirects:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Run generate redirects
+        uses: ./
+        with:
+          target: 'test/output'
+          links: |
+            {
+              "index": "https://google.com",
+              "twitter": "https://x.com"
+            }
+
+      - name: Git commit
+        run: |
+          # git commit if there's any change
+          if test -n "$(git status --porcelain 2>/dev/null)"; then
+              git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+              git config --local user.name "github-actions[bot]"
+              git add .
+              git commit -m "Add files"
+              git pull
+              git push origin ${GITHUB_REF##*/}
+          fi

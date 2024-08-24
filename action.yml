@@ -1,0 +1,21 @@
+name: 'Generate Redirects'
+description: 'A GitHub Action to generate HTML redirect files based on provided links.'
+
+author: 'B1nj0y <idegorepl@gmail.com>'
+
+inputs:
+  target:
+    description: 'The target directory relative to the root where HTML files will be created.'
+    required: true
+    default: './output'
+  links:
+    description: 'A JSON string containing the filename to URL mapping.'
+    required: true
+
+runs:
+  using: 'node16'
+  main: 'index.js'
+
+branding:
+  icon: 'globe'
+  color: 'blue'
